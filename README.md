@@ -110,13 +110,9 @@ http://localhost:3000/api/image
 (if success you will see "done" and image will in the images folder)
 
 # Notice
-* 目前未加上壓縮處理，如果內存過多會爆，需要做額外處理，未來可使用：
+* response時間大概落在2秒以上，時間有點久，或許可以思考：
 1. 設限圖片大小
-2. 控制input stream的大小，避免源消耗來不及 
-3. nodejs內置的[zlib](https://nodejs.org/api/zlib.html)套件來實現壓縮
-```
-const zlib = require('zlib')
-pipeline
-input->zlib.createGzip()->output
-```
+2. highWaterMark
+3. 處理高併發請求
+
 * Sharp套件對M1開發者相對不友善，需要額外做設定，未來可考慮使用其他套件，如[jimp](https://www.npmjs.com/package/jimp)。
