@@ -66,6 +66,9 @@ Use Node.js build-in package
 ```
 git clone https://github.com/JHIH-LEI/Code-Challenge.git
 ```
+```
+cd code-challenge
+```
 
 ### Add a images folder
 
