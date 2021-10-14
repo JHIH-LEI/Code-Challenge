@@ -1,6 +1,7 @@
 const validUrl = require('valid-url')
 const fetch = require('node-fetch')
 const { createReadStream } = require('fs')
+const sharp = require('sharp')
 const processedImageForTest = createReadStream('test/fixtures/before.png')
 
 async function validateFormate(req, res, next) {
@@ -28,5 +29,20 @@ async function validateFormateForTest(req, res, next) {
   }
 }
 
+const flipIMG = sharp()
+  .flip(true)
+  .flop(true)
+  .toBuffer((err, buffer, info) => { })
 
-module.exports = { validateFormate, validateFormateForTest }
+function getPathname(image) {
+  let pathname;
+  if (image.url) {
+    return pathname = new URL(image.url).pathname
+  } else {
+    return pathname = 'image'
+  }
+}
+
+
+module.exports = { validateFormate, validateFormateForTest, flipIMG, getPathname }
+
