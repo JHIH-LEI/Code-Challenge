@@ -1,6 +1,5 @@
 const validUrl = require('valid-url')
 const fetch = require('node-fetch')
-const sharp = require('sharp')
 const { validateFormateForTest } = require('../_helpers')
 
 async function validateFormate(req, res, next) {
@@ -19,11 +18,6 @@ async function validateFormate(req, res, next) {
   }
 }
 
-const flipIMG = sharp()
-  .flip(true)
-  .flop(true)
-  .toBuffer((err, buffer, info) => { })
-
 function getPathname(image) {
   let pathname;
   if (image.url) {
@@ -33,6 +27,5 @@ function getPathname(image) {
   }
 }
 
-
-module.exports = { validateFormate, validateFormateForTest, flipIMG, getPathname }
+module.exports = { validateFormate, validateFormateForTest, getPathname }
 

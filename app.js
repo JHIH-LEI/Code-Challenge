@@ -4,7 +4,8 @@ const PORT = 3000
 const { createWriteStream } = require('fs')
 const { pipeline } = require('stream')
 const { promisify } = require('util')
-const { validateFormate, flipIMG, getPathname } = require('./tools/helpers')
+const sharp = require('sharp')
+const { validateFormate, getPathname } = require('./tools/helpers')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
@@ -15,7 +16,13 @@ app.post('/api/image', validateFormate, async (req, res) => {
     const streamPipeline = promisify(pipeline)
     const { image } = res.locals
     const pathname = getPathname(image)
-    await streamPipeline(image.body || image, flipIMG, createWriteStream(`images/${pathname}.png`))
+
+    const flipImage = sharp()
+      .flip(true)
+      .flop(true)
+      .toBuffer((err, buffer, info) => { })
+
+    await streamPipeline(image.body || image, flipImage, createWriteStream(`images/${pathname}.png`))
     res.send('done')
   } catch (err) {
     console.warn(err)

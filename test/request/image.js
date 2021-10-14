@@ -20,9 +20,12 @@ describe('#flip and flop image', () => {
         .expect(200)
         .end((err, res) => {
           if (err) return done(err)
+
           const processedResult = readFileSync('images/image.png')
           const expectedImage = readFileSync('test/fixtures/after.png')
+
           assert.deepStrictEqual(processedResult, expectedImage)
+
           return done()
         })
     })
