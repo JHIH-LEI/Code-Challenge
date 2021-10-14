@@ -3,7 +3,6 @@ const app = express()
 const PORT = 3000
 const { createWriteStream } = require('fs')
 const { pipeline } = require('stream')
-const sharp = require('sharp')
 const { promisify } = require('util')
 const { validateFormate, flipIMG, getPathname } = require('./tools/helpers')
 

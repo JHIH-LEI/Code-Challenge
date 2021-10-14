@@ -1,8 +1,7 @@
 const validUrl = require('valid-url')
 const fetch = require('node-fetch')
-const { createReadStream } = require('fs')
 const sharp = require('sharp')
-const processedImageForTest = createReadStream('test/fixtures/before.png')
+const { validateFormateForTest } = require('../_helpers')
 
 async function validateFormate(req, res, next) {
   try {
@@ -17,15 +16,6 @@ async function validateFormate(req, res, next) {
   } catch (err) {
     console.warn(err)
     res.status('404').json(err)
-  }
-}
-
-async function validateFormateForTest(req, res, next) {
-  try {
-    res.locals.image = processedImageForTest
-    next()
-  } catch (err) {
-    console.warn(err)
   }
 }
 
