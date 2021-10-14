@@ -28,7 +28,7 @@ app.post('/api/image', validateFormate, async (req, res) => {
       .flop(true)
       .toBuffer((err, buffer, info) => { })
 
-    await streamPipeline(image.body ? image.body : image, flipIMG, createWriteStream(`images/${pathname}.png`))
+    await streamPipeline(image.body || image, flipIMG, createWriteStream(`images/${pathname}.png`))
     res.send('done')
   } catch (err) {
     console.warn(err)
